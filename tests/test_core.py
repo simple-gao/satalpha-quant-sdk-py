@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-from satalpha_quant_sdk_py.core import AggTradeWebSocketClient
+from satalpha_quant_sdk_py.core import PublicWebSocketClient
 
 def message_handler(msg: str):
     print("收到消息:", msg)
@@ -8,7 +8,8 @@ def message_handler(msg: str):
 async def main():
     # 测试本地地址
     ws_url = "ws://localhost:9999/ws/public"
-    client = AggTradeWebSocketClient(ws_url)
+    client = PublicWebSocketClient(ws_url)
+    client.set_topic("aggTrade")
     client.set_params(["PERP_BTC/USDT:USDT", "PERP_ETH/USDT:USDT"])
     client.on_message(message_handler)
 

@@ -2,16 +2,20 @@ import asyncio
 import json
 import websockets
 
-class AggTradeWebSocketClient:
+class PublicWebSocketClient:
     def __init__(self, url: str):
         self.url = url
         self.params = []
+        self.topic = None
         self.ws = None
         self.on_message_callback = None
         self._stop = False
 
     def set_params(self, params: list[str]):
         self.params = params
+
+    def set_topic(self, topic: str):
+        self.topic = topic
 
     def on_message(self, callback):
         """注册收到消息回调"""
@@ -46,7 +50,7 @@ class AggTradeWebSocketClient:
             return
         sub_msg = {
             "op": "subscribe",
-            "topic": "aggTrade",
+            "topic": self.topic,
             "params": self.params
         }
         await self.ws.send(json.dumps(sub_msg))
@@ -58,7 +62,7 @@ class AggTradeWebSocketClient:
             return
         unsub_msg = {
             "op": "unsubscribe",
-            "topic": "aggTrade",
+            "topic": self.topic,
             "params": self.params
         }
         if self.ws is not None:
