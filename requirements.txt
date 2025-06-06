@@ -1,0 +1,10 @@
+iniconfig==2.1.0
+packaging==25.0
+pluggy==1.6.0
+Pygments==2.19.1
+pytest==8.4.0
+pytest-asyncio==1.0.0
+python-socks==2.7.1
+# Editable install with no version control (satalpha-quant-sdk-py==0.1.0)
+-e /Users/simple/Desktop/satalpha-quant-sdk-py
+websockets==15.0.1
