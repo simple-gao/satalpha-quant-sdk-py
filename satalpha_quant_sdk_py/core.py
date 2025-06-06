@@ -2,7 +2,7 @@ import asyncio
 import json
 import websockets
 
-class WebSocketClient:
+class AggTradeWebSocketClient:
     def __init__(self, url: str):
         self.url = url
         self.params = []
@@ -21,7 +21,7 @@ class WebSocketClient:
         while not self._stop:
             try:
                 print("尝试连接 WebSocket...")
-                async with websockets.connect(self.url, ping_interval=20, ping_timeout=10) as ws:
+                async with websockets.connect(self.url) as ws:
                     self.ws = ws
                     print("WebSocket 连接成功")
                     await self._send_subscribe()
@@ -42,7 +42,7 @@ class WebSocketClient:
 
     async def _send_subscribe(self):
         if not self.params:
-            print("警告：订阅参数为空，无法订阅")
+            print("订阅参数为空，无法订阅")
             return
         sub_msg = {
             "op": "subscribe",
