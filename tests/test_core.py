@@ -7,7 +7,7 @@ def message_handler(msg: str):
 
 async def main():
     # 测试本地地址
-    ws_url = "ws://localhost:9999/ws/public"
+    ws_url = "wss://quant-ws-test.satsalpha.com/public"
     client = PublicWebSocketClient(ws_url)
     client.set_topic("aggTrade")
     client.set_params(["PERP_BTC/USDT:USDT", "PERP_ETH/USDT:USDT"])
